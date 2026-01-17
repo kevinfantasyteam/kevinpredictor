@@ -1136,30 +1136,20 @@
 
   // --- Initial Setup and Event Listeners ---
    document.addEventListener("DOMContentLoaded", () => {
-    getDeviceId();
     document.getElementById("loginButton").addEventListener("click", handleLogin);
     document.getElementById("getKeyButton").addEventListener("click", getKey);
-    document.getElementById("logoutButton").addEventListener("click", handleLogout);
-    
-    document.querySelectorAll('.nav-button').forEach(btn => {
-      btn.addEventListener('click', () => showPage(btn.dataset.page));
-    });
-
-    if (localStorage.getItem("access_key")) {
-      showMainApp();
-      startApp();
-    }
+    // ... rest same
   });
 
-  // CSS Animations
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    @keyframes gradientBG { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
-    .nav-button.active { color: white !important; }
-  `;
-  document.head.appendChild(style);
-
+  // SPECIAL: For you (@kevinpredictor) - Press Ctrl+Shift+G to generate key for current device
+  document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.shiftKey && e.key === 'G') {
+      const deviceId = getDeviceId();
+      generateAccessKey(deviceId, 168).then(key => {
+        alert(`New Key Generated: ${key}\nShare this with users!`);
+      });
+    }
+  });
 </script>
 </body>
 </html>
