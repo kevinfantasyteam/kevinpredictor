@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ANIKESH AI - Trend Analyzer & Login</title>
+  <title>KEVIN AI - Trend Analyzer & Login</title>
   <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
@@ -592,7 +592,7 @@
 <body>
   <div class="app-container">
     <div id="loginView" class="login-container">
-      <div class="login-title">ANIKESH AI LOGIN</div>
+      <div class="login-title">KEVIN AI LOGIN</div>
       <div class="login-box">
         <div class="device-id" id="deviceId"></div>
         <input type="text" id="accessKey" placeholder="Enter Access Key">
@@ -605,7 +605,7 @@
 
     <div id="mainAppView" class="main-container" style="display: none;">
       <div id="keyTimer" class="timer-container">Key Expiry: Loading...</div>
-      <div class="header">ANIKESH AI</div>
+      <div class="header">KEVIN AI</div>
 
       <div id="homePage" class="page-section active">
         <div class="card">
@@ -681,13 +681,14 @@
 
   // --- Login Page Constants & Functions ---
   const firebaseConfig = {
-   apiKey: "AIzaSyAO2CCor1-8rARsC6cIdifbWmOQkMz3i1s",
+    apiKey: "AIzaSyAO2CCor1-8rARsC6cIdifbWmOQkMz3i1s",
     authDomain: "kevinpredictor.firebaseapp.com",
     databaseURL: "https://kevinpredictor-default-rtdb.firebaseio.com",
     projectId: "kevinpredictor",
     storageBucket: "kevinpredictor.firebasestorage.app",
     messagingSenderId: "1085591952173",
     appId: "1:1085591952173:web:9019178bbb2e7278c011a4",
+    measurementId: "G-R84RCZTMDW"
   };
 
   const app = initializeApp(firebaseConfig);
@@ -772,8 +773,8 @@
 
   function getKey() {
     const deviceId = getDeviceId();
-    const message = encodeURIComponent(`Hello t.me/kevinpredictor, I need an Access Key for Device ID: ${deviceId}`);
-    window.open(`https://t.me/kevinpredictor?text=${message}`, '_blank');
+    const message = encodeURIComponent(`Hello t.me//kevinpredictor, I need an Access Key for Device ID: ${deviceId}`);
+    window.open(`https://t.me//kevinpredictor?text=${message}`, '_blank');
   }
   
   // --- UI Display Functions ---
@@ -1134,29 +1135,30 @@
   }
 
   // --- Initial Setup and Event Listeners ---
-  document.addEventListener("DOMContentLoaded", () => {
+   document.addEventListener("DOMContentLoaded", () => {
+    getDeviceId();
     document.getElementById("loginButton").addEventListener("click", handleLogin);
     document.getElementById("getKeyButton").addEventListener("click", getKey);
     document.getElementById("logoutButton").addEventListener("click", handleLogout);
     
-    document.getElementById("pastResultsToggle").addEventListener("click", () => {
-      const container = document.getElementById("pastResultsContainer");
-      container.classList.toggle("show");
+    document.querySelectorAll('.nav-button').forEach(btn => {
+      btn.addEventListener('click', () => showPage(btn.dataset.page));
     });
-    
-    document.querySelectorAll('.nav-button').forEach(button => {
-        button.addEventListener('click', () => {
-            showPage(button.dataset.page);
-        });
-    });
-    
+
     if (localStorage.getItem("access_key")) {
       showMainApp();
       startApp();
-    } else {
-      getDeviceId();
     }
   });
+
+  // CSS Animations
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    @keyframes gradientBG { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+    .nav-button.active { color: white !important; }
+  `;
+  document.head.appendChild(style);
 
 </script>
 </body>
