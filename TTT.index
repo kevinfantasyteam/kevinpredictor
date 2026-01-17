@@ -311,7 +311,7 @@
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 0.5fr;
         gap: 10px;
-        text-align:  center;
+        text-align: center;
         padding: 0 10px;
         font-weight: 700;
         font-size: 0.9rem;
@@ -679,9 +679,9 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
   import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
 
-  // Updated Firebase Config for Kevin Predictor
+  // --- Login Page Constants & Functions ---
   const firebaseConfig = {
-    apiKey: "AIzaSyAO2CCor1-8rARsC6cIdifbWmOQkMz3i1s",
+    a apiKey: "AIzaSyAO2CCor1-8rARsC6cIdifbWmOQkMz3i1s",
     authDomain: "kevinpredictor.firebaseapp.com",
     databaseURL: "https://kevinpredictor-default-rtdb.firebaseio.com",
     projectId: "kevinpredictor",
@@ -773,11 +773,11 @@
 
   function getKey() {
     const deviceId = getDeviceId();
-    const message = encodeURIComponent(`Hello t.me/kevinpredictor, I need an Access Key for Device ID: ${deviceId}`);
-    window.open(`https://t.me/kevinpredictor?text=${message}`, '_blank');
+    const message = encodeURIComponent(`Hello t.me/Tkevinpredictor, I need an Access Key for Device ID: ${deviceId}`);
+    window.open(`https://t.me/Tkevinpredictor001?text=${message}`, '_blank');
   }
   
-  // UI Display Functions
+  // --- UI Display Functions ---
   function showMainApp() {
     document.getElementById('loginView').style.display = 'none';
     document.getElementById('mainAppView').style.display = 'flex';
@@ -804,7 +804,7 @@
     }
   }
 
-  // Main App Constants & Functions
+  // --- Main App Constants & Functions ---
   const CURRENT_API = 'https://api.bdg88zf.com/api/webapi/GetGameIssue';
   const HISTORY_API = 'https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json';
 
@@ -825,7 +825,7 @@
   const SMALL_NUMBERS = [0, 1, 2, 3, 4];
   const GREEN_NUMBERS = [1, 3, 7, 9, 5];
   const RED_NUMBERS = [2, 4, 6, 8, 0];
-  const VIOLET_NUMBERS = [];
+  const VIOLET_NUMBERS = []; // According to new rules, no numbers are purely violet.
 
   function getBigSmall(num) { return num >= 5 ? "BIG" : "SMALL"; }
   function getColorName(num) {
@@ -941,6 +941,7 @@
         }
     }
     
+    // Always return a prediction, even if the count is low
     const predictionText = `${predictedSize}/${predictedColor}`;
     
     return {
@@ -982,7 +983,6 @@
         </div>`;
     }).join("");
   }
-
   function renderPastResults(results) {
     const container = document.getElementById("pastResultsContainer");
     container.innerHTML = results.slice(0, 20).map(item => {
@@ -1001,7 +1001,6 @@
         </div>`;
     }).join("");
   }
-
   function renderHistory() {
       const historyList = document.getElementById("historyList");
       if (predictionHistory.length === 0) {
