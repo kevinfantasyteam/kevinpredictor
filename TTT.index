@@ -311,7 +311,7 @@
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 0.5fr;
         gap: 10px;
-        text-align: center;
+        text-align:  center;
         padding: 0 10px;
         font-weight: 700;
         font-size: 0.9rem;
@@ -675,12 +675,11 @@
     </div>
   </div>
 
-script type="module">
-  // YOUR FIREBASE CONFIG ADDED ✅
+<script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js";
-  import { getDatabase, ref, get, update, set } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+  import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
 
+  // Updated Firebase Config for Kevin Predictor
   const firebaseConfig = {
     apiKey: "AIzaSyAO2CCor1-8rARsC6cIdifbWmOQkMz3i1s",
     authDomain: "kevinpredictor.firebaseapp.com",
@@ -693,12 +692,11 @@ script type="module">
   };
 
   const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
   const db = getDatabase(app);
 
-  let userWinCount = 0, userLossCount = 0;
-  let fetchInterval, timeInterval, keyTimerInterval;
-  const TELEGRAM_USER = "kevinpredictor"; // Your username without @
+  let userWinCount = 0;
+  let userLossCount = 0;
+
   function getDeviceId() {
     let id = localStorage.getItem("device_id");
     if (!id) {
@@ -775,11 +773,11 @@ script type="module">
 
   function getKey() {
     const deviceId = getDeviceId();
-    const message = encodeURIComponent(`Hello t.me/kevinpredictor, , I need an Access Key for Device ID: ${deviceId}`);
-    window.open(`https://t.me/kevinpredictor, 001?text=${message}`, '_blank');
+    const message = encodeURIComponent(`Hello t.me/kevinpredictor, I need an Access Key for Device ID: ${deviceId}`);
+    window.open(`https://t.me/kevinpredictor?text=${message}`, '_blank');
   }
   
-  // --- UI Display Functions ---
+  // UI Display Functions
   function showMainApp() {
     document.getElementById('loginView').style.display = 'none';
     document.getElementById('mainAppView').style.display = 'flex';
@@ -806,7 +804,7 @@ script type="module">
     }
   }
 
-  // --- Main App Constants & Functions ---
+  // Main App Constants & Functions
   const CURRENT_API = 'https://api.bdg88zf.com/api/webapi/GetGameIssue';
   const HISTORY_API = 'https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json';
 
@@ -827,7 +825,7 @@ script type="module">
   const SMALL_NUMBERS = [0, 1, 2, 3, 4];
   const GREEN_NUMBERS = [1, 3, 7, 9, 5];
   const RED_NUMBERS = [2, 4, 6, 8, 0];
-  const VIOLET_NUMBERS = []; // According to new rules, no numbers are purely violet.
+  const VIOLET_NUMBERS = [];
 
   function getBigSmall(num) { return num >= 5 ? "BIG" : "SMALL"; }
   function getColorName(num) {
@@ -943,7 +941,6 @@ script type="module">
         }
     }
     
-    // Always return a prediction, even if the count is low
     const predictionText = `${predictedSize}/${predictedColor}`;
     
     return {
@@ -985,6 +982,7 @@ script type="module">
         </div>`;
     }).join("");
   }
+
   function renderPastResults(results) {
     const container = document.getElementById("pastResultsContainer");
     container.innerHTML = results.slice(0, 20).map(item => {
@@ -1003,6 +1001,7 @@ script type="module">
         </div>`;
     }).join("");
   }
+
   function renderHistory() {
       const historyList = document.getElementById("historyList");
       if (predictionHistory.length === 0) {
